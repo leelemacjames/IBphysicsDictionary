@@ -1,0 +1,2297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IB Physics Data Booklet Equation Cards</title>
+<style>
+:root {
+  --bg:#0c0d10; --surface:#151821; --surface2:#10131a; --border:#2a2f3b;
+  --text:#ece8df; --muted:#a39a8a; --gold:#d8b36a; --hl:#d65a5a; --accent:#7ec8e3; --green:#9bd29b;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: radial-gradient(circle at top, #171b24 0%, var(--bg) 50%);
+  color:var(--text); min-height:100vh;
+}
+.wrap { max-width: 980px; margin: 0 auto; padding: 20px; }
+header {
+  text-align:center; padding: 10px 0 18px;
+}
+h1 {
+  margin:0; font-family: Georgia, 'Times New Roman', serif; color:var(--gold); font-size:clamp(2rem,4vw,3.2rem);
+}
+.sub { color:var(--muted); margin-top:8px; line-height:1.55; max-width:850px; margin-left:auto; margin-right:auto; }
+.controls {
+  display:grid; grid-template-columns: 1fr auto auto auto auto; gap:10px; align-items:center;
+  margin: 18px 0 18px;
+}
+select, input, button {
+  background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:14px;
+  padding:10px 12px; font-size:0.95rem;
+}
+button {
+  cursor:pointer; transition: transform .14s ease, background .14s ease, border-color .14s ease;
+}
+button:hover { transform: translateY(-1px); border-color:#4a5365; }
+.stats {
+  display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-bottom:14px; color:var(--muted); font-size:0.9rem;
+}
+.pill {
+  border:1px solid var(--border); background:rgba(255,255,255,.03); border-radius:999px; padding:6px 10px;
+}
+.deck {
+  perspective: 1200px; margin: 0 auto; max-width: 780px;
+}
+.card {
+  position:relative; min-height: 420px; border-radius: 28px; border:1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)), var(--surface);
+  box-shadow: 0 18px 50px rgba(0,0,0,.28); overflow:hidden; user-select:none;
+  touch-action: pan-y;
+}
+.card-inner {
+  position:relative; width:100%; min-height:420px; transition: transform .55s ease;
+  transform-style: preserve-3d;
+}
+.card.flipped .card-inner { transform: rotateY(180deg); }
+.face {
+  position:absolute; inset:0; backface-visibility:hidden; display:flex; flex-direction:column;
+  padding:20px 22px 24px;
+}
+.back { transform: rotateY(180deg); }
+.toprow {
+  display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:8px;
+}
+.badges { display:flex; gap:8px; flex-wrap:wrap; }
+.badge {
+  font-size:.75rem; text-transform:uppercase; letter-spacing:.06em; padding:6px 10px; border-radius:999px;
+  border:1px solid var(--border); color:var(--muted); background:rgba(255,255,255,.03);
+}
+.badge.hl { color:#fff; background:rgba(214,90,90,.18); border-color: rgba(214,90,90,.55); }
+.type-equation { color:var(--gold); }
+.type-constant { color:var(--accent); }
+.type-symbol,.type-prefix,.type-conversion { color:var(--green); }
+.prompt {
+  flex:1; display:flex; align-items:center; justify-content:center; text-align:center;
+  font-size: clamp(1.45rem, 2.9vw, 2.15rem); line-height:1.35; padding: 18px 10px;
+}
+.equation {
+  flex:1; display:flex; align-items:center; justify-content:center; text-align:center;
+  font-size: clamp(1.55rem, 3.2vw, 2.45rem); line-height:1.3; padding: 10px;
+  font-family: "Cambria Math", "STIX Two Math", Georgia, serif; color:#fff7e8;
+}
+.meta {
+  margin-top:auto; display:grid; gap:10px;
+}
+.metaBox {
+  padding:14px 16px; border-radius:16px; background: var(--surface2); border:1px solid var(--border);
+}
+.metaTitle { font-size:.78rem; text-transform:uppercase; color:var(--muted); letter-spacing:.08em; margin-bottom:6px; }
+.swipeHint {
+  text-align:center; color:var(--muted); font-size:.82rem; margin-top:14px;
+}
+.nav {
+  display:flex; gap:12px; justify-content:center; align-items:center; margin-top:18px; flex-wrap:wrap;
+}
+.nav button {
+  min-width:120px;
+}
+.progress {
+  width:min(780px, 100%); height:8px; background:#1a1f29; border-radius:999px; overflow:hidden; margin: 18px auto 0;
+  border:1px solid var(--border);
+}
+.progress > div {
+  height:100%; background:linear-gradient(90deg, var(--gold), #f0d39b); width:0%;
+}
+small.key {
+  color:var(--muted);
+}
+@media (max-width: 760px) {
+  .controls { grid-template-columns: 1fr 1fr; }
+  .controls .search { grid-column: 1 / -1; }
+  .card, .card-inner { min-height: 500px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>IB Physics Data Booklet Cards</h1>
+    <div class="sub">
+      A tap-to-flip equation deck built from the <em>Physics data booklet, first assessment 2025</em>.
+      Fronts test recognition from variables, context, or dimensional cues. Backs give the exact databooklet relation,
+      with units and a brief reminder. Tap anywhere on the card to flip. Swipe left for next and right for previous.
+    </div>
+  </header>
+
+  <div class="controls">
+    <input class="search" id="search" type="text" placeholder="Search by variable, phrase, unit, or topic…" />
+    <select id="sectionFilter"></select>
+    <select id="hlFilter">
+      <option value="all">All levels</option>
+      <option value="sl">Core / SL shown only</option>
+      <option value="hl">HL only</option>
+    </select>
+    <button id="shuffleBtn">Shuffle</button>
+    <button id="resetBtn">Reset</button>
+  </div>
+
+  <div class="stats">
+    <div class="pill" id="countPill"></div>
+    <div class="pill">Tap card to flip</div>
+    <div class="pill">Swipe left / right to move</div>
+    <div class="pill">Arrow keys also work</div>
+  </div>
+
+  <div class="deck">
+    <div class="card" id="card">
+      <div class="card-inner" id="cardInner">
+        <section class="face front">
+          <div class="toprow">
+            <div class="badges" id="frontBadges"></div>
+            <div id="indexTop" class="badge"></div>
+          </div>
+          <div class="prompt" id="prompt"></div>
+          <div class="meta">
+            <div class="metaBox">
+              <div class="metaTitle">Front prompt style</div>
+              <div>Question built around description, variables, or physical meaning.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="face back">
+          <div class="toprow">
+            <div class="badges" id="backBadges"></div>
+            <div id="indexBack" class="badge"></div>
+          </div>
+          <div class="equation" id="answer"></div>
+          <div class="meta">
+            <div class="metaBox" id="unitsBox" style="display:none;">
+              <div class="metaTitle">Units / form</div>
+              <div id="units"></div>
+            </div>
+            <div class="metaBox" id="notesBox" style="display:none;">
+              <div class="metaTitle">Memory cue</div>
+              <div id="notes"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="swipeHint"><small class="key">Tip:</small> full-card touch is enabled. Quick tap flips. Horizontal swipe navigates.</div>
+
+  <div class="nav">
+    <button id="prevBtn">← Previous</button>
+    <button id="flipBtn">Flip card</button>
+    <button id="nextBtn">Next →</button>
+  </div>
+
+  <div class="progress"><div id="progressBar"></div></div>
+</div>
+
+<script>
+const ALL_CARDS = [
+  {
+    "section": "Maths",
+    "prompt": "What equation gives the area of a triangle from base b and height h?",
+    "answer": "A = 1/2 bh",
+    "units": "A in m² if b,h are in m",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Maths",
+    "prompt": "What equation gives the area of a circle from radius r?",
+    "answer": "A = πr²",
+    "units": "A in m² if r is in m",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Maths",
+    "prompt": "What equation gives the circumference of a circle from radius r?",
+    "answer": "C = 2πr",
+    "units": "C in m if r is in m",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Maths",
+    "prompt": "What equation gives the volume of a cuboid from width w, length l, and height h?",
+    "answer": "V = wlh",
+    "units": "V in m³",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Maths",
+    "prompt": "What equation gives the volume of a cylinder from radius r and height h?",
+    "answer": "V = πr²h",
+    "units": "V in m³",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Maths",
+    "prompt": "What equation gives the volume of a prism from cross-sectional area A and height h?",
+    "answer": "V = Ah",
+    "units": "V in m³",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Maths",
+    "prompt": "What equation gives the volume of a sphere from radius r?",
+    "answer": "V = 4/3 πr³",
+    "units": "V in m³",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Maths",
+    "prompt": "What equation gives the curved surface area of a cylinder?",
+    "answer": "A = 2πrh",
+    "units": "A in m²",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Maths",
+    "prompt": "Resolve a vector A at angle θ to the horizontal. What are the horizontal and vertical components?",
+    "answer": "A_H = A cosθ,   A_V = A sinθ",
+    "units": "same units as A",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Maths",
+    "prompt": "Which trigonometric identity links sin and cos?",
+    "answer": "sin²θ + cos²θ = 1",
+    "units": "",
+    "notes": "Also tanθ = sinθ / cosθ",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Uncertainties",
+    "prompt": "For y = a ± b, how do absolute uncertainties combine?",
+    "answer": "Δy = Δa + Δb",
+    "units": "same units as y",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Uncertainties",
+    "prompt": "For y = ab/c, how do fractional uncertainties combine?",
+    "answer": "Δy/y = Δa/a + Δb/b + Δc/c",
+    "units": "dimensionless",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Uncertainties",
+    "prompt": "For y = aⁿ, what is the fractional uncertainty rule?",
+    "answer": "Δy/y = |n| Δa/a",
+    "units": "dimensionless",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value and units are used for acceleration of free fall at Earth’s surface?",
+    "answer": "g = 9.8 m s⁻²",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value and units are used for the gravitational constant?",
+    "answer": "G = 6.67 × 10⁻¹¹ N m² kg⁻²",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value and units are used for Avogadro’s constant?",
+    "answer": "N_A = 6.02 × 10²³ mol⁻¹",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value and units are used for the gas constant?",
+    "answer": "R = 8.31 J K⁻¹ mol⁻¹",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value and units are used for the Boltzmann constant?",
+    "answer": "k_B = 1.38 × 10⁻²³ J K⁻¹",
+    "units": "",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value and units are used for the Stefan–Boltzmann constant?",
+    "answer": "σ = 5.67 × 10⁻⁸ W m⁻² K⁻⁴",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value and units are used for Coulomb’s constant?",
+    "answer": "k = 8.99 × 10⁹ N m² C⁻²",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value and units are used for the permittivity of free space?",
+    "answer": "ε₀ = 8.85 × 10⁻¹² C² N⁻¹ m⁻²",
+    "units": "",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value and units are used for the permeability of free space?",
+    "answer": "μ₀ = 4π × 10⁻⁷ T m A⁻¹",
+    "units": "",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value and units are used for the speed of light in vacuum?",
+    "answer": "c = 3.00 × 10⁸ m s⁻¹",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value and units are used for Planck’s constant?",
+    "answer": "h = 6.63 × 10⁻³⁴ J s",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value and units are used for the elementary charge?",
+    "answer": "e = 1.60 × 10⁻¹⁹ C",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What values are used for the electron rest mass?",
+    "answer": "mₑ = 9.11 × 10⁻³¹ kg = 0.000549 u = 0.511 MeV c⁻²",
+    "units": "",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What values are used for the proton rest mass?",
+    "answer": "mₚ = 1.673 × 10⁻²⁷ kg = 1.007276 u = 938 MeV c⁻²",
+    "units": "",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What values are used for the neutron rest mass?",
+    "answer": "mₙ = 1.675 × 10⁻²⁷ kg = 1.008665 u = 940 MeV c⁻²",
+    "units": "",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value is used for the unified atomic mass unit?",
+    "answer": "u = 1.661 × 10⁻²⁷ kg = 931.5 MeV c⁻²",
+    "units": "",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value is used for the solar constant?",
+    "answer": "S = 1.36 × 10³ W m⁻²",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Constants",
+    "prompt": "What value is used for the Fermi radius constant?",
+    "answer": "R₀ = 1.20 × 10⁻¹⁵ m",
+    "units": "",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What SI prefix has abbreviation P?",
+    "answer": "peta = 10¹⁵",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What power of ten does the SI prefix peta represent?",
+    "answer": "P = 10¹⁵",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What SI prefix has abbreviation T?",
+    "answer": "tera = 10¹²",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What power of ten does the SI prefix tera represent?",
+    "answer": "T = 10¹²",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What SI prefix has abbreviation G?",
+    "answer": "giga = 10⁹",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What power of ten does the SI prefix giga represent?",
+    "answer": "G = 10⁹",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What SI prefix has abbreviation M?",
+    "answer": "mega = 10⁶",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What power of ten does the SI prefix mega represent?",
+    "answer": "M = 10⁶",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What SI prefix has abbreviation k?",
+    "answer": "kilo = 10³",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What power of ten does the SI prefix kilo represent?",
+    "answer": "k = 10³",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What SI prefix has abbreviation h?",
+    "answer": "hecto = 10²",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What power of ten does the SI prefix hecto represent?",
+    "answer": "h = 10²",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What SI prefix has abbreviation da?",
+    "answer": "deca = 10¹",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What power of ten does the SI prefix deca represent?",
+    "answer": "da = 10¹",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What SI prefix has abbreviation d?",
+    "answer": "deci = 10⁻¹",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What power of ten does the SI prefix deci represent?",
+    "answer": "d = 10⁻¹",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What SI prefix has abbreviation c?",
+    "answer": "centi = 10⁻²",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What power of ten does the SI prefix centi represent?",
+    "answer": "c = 10⁻²",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What SI prefix has abbreviation m?",
+    "answer": "milli = 10⁻³",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What power of ten does the SI prefix milli represent?",
+    "answer": "m = 10⁻³",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What SI prefix has abbreviation μ?",
+    "answer": "micro = 10⁻⁶",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What power of ten does the SI prefix micro represent?",
+    "answer": "μ = 10⁻⁶",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What SI prefix has abbreviation n?",
+    "answer": "nano = 10⁻⁹",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What power of ten does the SI prefix nano represent?",
+    "answer": "n = 10⁻⁹",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What SI prefix has abbreviation p?",
+    "answer": "pico = 10⁻¹²",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What power of ten does the SI prefix pico represent?",
+    "answer": "p = 10⁻¹²",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What SI prefix has abbreviation f?",
+    "answer": "femto = 10⁻¹⁵",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "SI Prefixes",
+    "prompt": "What power of ten does the SI prefix femto represent?",
+    "answer": "f = 10⁻¹⁵",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "prefix"
+  },
+  {
+    "section": "Conversions",
+    "prompt": "How do you convert radians to degrees?",
+    "answer": "1 rad = 180/π °",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Conversions",
+    "prompt": "How do you convert temperature in Celsius to kelvin?",
+    "answer": "T(K) = T(°C) + 273",
+    "units": "kelvin",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Conversions",
+    "prompt": "What is 1 light year in metres?",
+    "answer": "1 ly = 9.46 × 10¹⁵ m",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Conversions",
+    "prompt": "What is 1 parsec in light years?",
+    "answer": "1 pc = 3.26 ly",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Conversions",
+    "prompt": "What is 1 astronomical unit in metres?",
+    "answer": "1 AU = 1.50 × 10¹¹ m",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Conversions",
+    "prompt": "What is 1 kilowatt-hour in joules?",
+    "answer": "1 kWh = 3.60 × 10⁶ J",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Conversions",
+    "prompt": "What useful combined constant links photon energy and wavelength?",
+    "answer": "hc = 1.99 × 10⁻²⁵ J m = 1.24 × 10⁻⁶ eV m",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Identify the circuit component that provides a single emf source.",
+    "answer": "Cell",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Identify the circuit component made from multiple cells.",
+    "answer": "Battery",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Identify the circuit component that opens or closes a circuit path.",
+    "answer": "Switch",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Which circuit component measures potential difference across a component?",
+    "answer": "Voltmeter",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Which circuit component measures current through a branch?",
+    "answer": "Ammeter",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Which circuit component opposes current with fixed resistance?",
+    "answer": "Resistor",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Which circuit component lets resistance be adjusted continuously?",
+    "answer": "Variable resistor",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Which circuit component changes resistance with light level?",
+    "answer": "Light-dependent resistor (LDR)",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Which circuit component changes resistance with temperature?",
+    "answer": "Thermistor",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Which variable-resistance component is commonly used as a potential divider?",
+    "answer": "Potentiometer",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Which circuit symbol represents a lamp or bulb?",
+    "answer": "Lamp",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Which circuit component emits light when current flows in the forward direction?",
+    "answer": "Light emitting diode (LED)",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Which circuit component is designed mainly to convert electrical energy to thermal energy?",
+    "answer": "Heating element",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Which circuit component converts electrical energy into rotational mechanical energy?",
+    "answer": "Motor",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "Circuit symbols",
+    "prompt": "Which circuit symbol indicates ground or earth?",
+    "answer": "Earth (ground)",
+    "units": "",
+    "notes": "Symbol identification card from the booklet.",
+    "hl": false,
+    "type": "symbol"
+  },
+  {
+    "section": "EM Spectrum",
+    "prompt": "List the electromagnetic spectrum from highest energy / shortest wavelength to lowest energy / longest wavelength.",
+    "answer": "γ rays → X-rays → UV → visible → IR → microwaves → radio waves",
+    "units": "",
+    "notes": "Visible ≈ 400–700 nm.",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "EM Spectrum",
+    "prompt": "What wavelength range is shown for visible light in the booklet?",
+    "answer": "Visible ≈ 400 nm to 700 nm",
+    "units": "nm",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "EM Spectrum",
+    "prompt": "Which end of the electromagnetic spectrum has the higher energy?",
+    "answer": "The short-wavelength end: γ rays / X-rays / UV",
+    "units": "",
+    "notes": "Energy increases as wavelength decreases.",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.1",
+    "prompt": "Which kinematics equation gives displacement from average of initial and final velocity over time?",
+    "answer": "s = (u + v)t / 2",
+    "units": "s in m",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.1",
+    "prompt": "Which kinematics equation links final velocity, initial velocity, acceleration and time?",
+    "answer": "v = u + at",
+    "units": "v,u in m s⁻¹; a in m s⁻²; t in s",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.1",
+    "prompt": "Which SUVAT equation gives displacement from initial velocity, time and constant acceleration?",
+    "answer": "s = ut + 1/2 at²",
+    "units": "s in m",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.1",
+    "prompt": "Which constant-acceleration equation eliminates time?",
+    "answer": "v² = u² + 2as",
+    "units": "v,u in m s⁻¹",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.2",
+    "prompt": "What inequality gives the maximum static friction?",
+    "answer": "F_f ≤ μ_s F_N",
+    "units": "N",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.2",
+    "prompt": "What equation gives dynamic friction?",
+    "answer": "F_f = μ_d F_N",
+    "units": "N",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.2",
+    "prompt": "What equation expresses Hooke’s law for a helical spring?",
+    "answer": "F_H = −kx",
+    "units": "N",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.2",
+    "prompt": "What equation gives Stokes drag on a sphere moving slowly through a fluid?",
+    "answer": "F_d = 6π η r v",
+    "units": "N",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.2",
+    "prompt": "What equation gives buoyant force from submerged volume V in a fluid of density ρ?",
+    "answer": "F_b = ρ V g",
+    "units": "N",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.2",
+    "prompt": "What equation gives weight close to Earth’s surface?",
+    "answer": "F_g = mg",
+    "units": "N",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.2",
+    "prompt": "What equation defines momentum?",
+    "answer": "p = mv",
+    "units": "kg m s⁻¹",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.2",
+    "prompt": "What equation defines impulse?",
+    "answer": "J = F Δt",
+    "units": "N s = kg m s⁻¹",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.2",
+    "prompt": "What equation states Newton’s second law in momentum form?",
+    "answer": "F = ma = Δp/Δt",
+    "units": "N",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.2",
+    "prompt": "What equivalent equations give centripetal acceleration?",
+    "answer": "a = v²/r = ω²r = 4π²r/T²",
+    "units": "m s⁻²",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.2",
+    "prompt": "What equivalent equations link linear speed, radius, period and angular speed in circular motion?",
+    "answer": "v = 2πr/T = ωr",
+    "units": "m s⁻¹",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.3",
+    "prompt": "What equation gives work done by a force acting at angle θ to displacement?",
+    "answer": "W = Fs cosθ",
+    "units": "J",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.3",
+    "prompt": "What two equivalent expressions are given for kinetic energy?",
+    "answer": "E_k = 1/2 mv² = p²/(2m)",
+    "units": "J",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.3",
+    "prompt": "What equation gives change in gravitational potential energy near Earth?",
+    "answer": "ΔE_p = mg Δh",
+    "units": "J",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.3",
+    "prompt": "What equation gives elastic potential energy stored in a spring?",
+    "answer": "E_H = 1/2 k(Δx)²",
+    "units": "J",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.3",
+    "prompt": "What equivalent equations give power?",
+    "answer": "P = ΔW/Δt = Fv",
+    "units": "W",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.3",
+    "prompt": "What equation defines efficiency?",
+    "answer": "η = useful work out / total work in = useful power out / total power in",
+    "units": "dimensionless or %",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "A.4",
+    "prompt": "What equation gives the turning moment of a force at lever arm r and angle θ?",
+    "answer": "τ = Fr sinθ",
+    "units": "N m",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.4",
+    "prompt": "What rotational kinematics equation gives angular displacement from average angular velocity over time?",
+    "answer": "Δθ = (ω_i + ω_f)t / 2",
+    "units": "rad",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.4",
+    "prompt": "What rotational kinematics equation links angular velocity, angular acceleration and time?",
+    "answer": "ω_f = ω_i + αt",
+    "units": "rad s⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.4",
+    "prompt": "What rotational SUVAT equation gives angular displacement from initial angular velocity and angular acceleration?",
+    "answer": "Δθ = ω_i t + 1/2 αt²",
+    "units": "rad",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.4",
+    "prompt": "Which rotational SUVAT equation eliminates time?",
+    "answer": "ω_f² = ω_i² + 2αΔθ",
+    "units": "rad² s⁻²",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.4",
+    "prompt": "How is moment of inertia built from point masses?",
+    "answer": "I = Σmr²",
+    "units": "kg m²",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.4",
+    "prompt": "What equation links net torque and angular acceleration?",
+    "answer": "τ = Iα",
+    "units": "N m",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.4",
+    "prompt": "What equation links angular momentum, moment of inertia and angular velocity?",
+    "answer": "L = Iω",
+    "units": "kg m² s⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.4",
+    "prompt": "What equation links torque to rate of change of angular momentum?",
+    "answer": "τ = ΔL/Δt",
+    "units": "N m",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.4",
+    "prompt": "What expression gives change in angular momentum when I is constant?",
+    "answer": "ΔL = Δ(Iω)",
+    "units": "kg m² s⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.4",
+    "prompt": "What equivalent equations give rotational kinetic energy?",
+    "answer": "E_k = 1/2 Iω² = L²/(2I)",
+    "units": "J",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.5",
+    "prompt": "What Galilean transformation gives position in a frame moving at speed v?",
+    "answer": "x' = x − vt",
+    "units": "m",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.5",
+    "prompt": "What Galilean transformation gives time in classical relativity?",
+    "answer": "t' = t",
+    "units": "s",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.5",
+    "prompt": "What Galilean velocity transformation is listed?",
+    "answer": "u' = u − v",
+    "units": "m s⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.5",
+    "prompt": "What Lorentz transformation gives x'?",
+    "answer": "x' = γ(x − vt)",
+    "units": "m",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.5",
+    "prompt": "What Lorentz transformation gives t'?",
+    "answer": "t' = γ(t − vx/c²)",
+    "units": "s",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.5",
+    "prompt": "What relativistic velocity transformation is listed?",
+    "answer": "u' = (u − v)/(1 − uv/c²)",
+    "units": "m s⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.5",
+    "prompt": "What invariant space-time interval is listed?",
+    "answer": "(Δs)² = (cΔt)² − (Δx)²",
+    "units": "m²",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.5",
+    "prompt": "What equation gives time dilation?",
+    "answer": "Δt = γΔt₀",
+    "units": "s",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.5",
+    "prompt": "What equation gives length contraction?",
+    "answer": "L = L₀/γ",
+    "units": "m",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "A.5",
+    "prompt": "What space-time diagram relation links worldline angle and speed?",
+    "answer": "tanθ = v/c",
+    "units": "dimensionless",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "B.1",
+    "prompt": "What equation defines density?",
+    "answer": "ρ = m/V",
+    "units": "kg m⁻³",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.1",
+    "prompt": "What equation links average random kinetic energy of particles to temperature?",
+    "answer": "E_k = 3/2 k_B T",
+    "units": "J",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.1",
+    "prompt": "What equation gives energy transfer when temperature changes but phase does not?",
+    "answer": "Q = mcΔT",
+    "units": "J",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.1",
+    "prompt": "What equation gives energy transfer during a phase change?",
+    "answer": "Q = mL",
+    "units": "J",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.1",
+    "prompt": "What equation gives the rate of conduction through a slab?",
+    "answer": "ΔQ/Δt = kA ΔT/Δx",
+    "units": "W",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.1",
+    "prompt": "What equation gives luminosity radiated by a body of area A and temperature T?",
+    "answer": "L = σAT⁴",
+    "units": "W",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.1",
+    "prompt": "What equation gives brightness from luminosity and distance?",
+    "answer": "b = L / (4πd²)",
+    "units": "W m⁻²",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.1",
+    "prompt": "What equation is Wien’s displacement law?",
+    "answer": "λ_max T = 2.9 × 10⁻³ m K",
+    "units": "m K",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.2",
+    "prompt": "How is emissivity defined in the greenhouse-effect page?",
+    "answer": "emissivity = power radiated per unit area / (σT⁴)",
+    "units": "dimensionless",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.2",
+    "prompt": "How is albedo defined in the booklet?",
+    "answer": "albedo = total scattered power / total incident power",
+    "units": "dimensionless",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.3",
+    "prompt": "What equation defines pressure from force and area?",
+    "answer": "P = F/A",
+    "units": "Pa = N m⁻²",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.3",
+    "prompt": "How is amount of substance linked to particle number?",
+    "answer": "n = N/N_A",
+    "units": "mol",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.3",
+    "prompt": "What ideal-gas relationship is given for a fixed amount of gas?",
+    "answer": "PV/T = constant",
+    "units": "",
+    "notes": "Equivalent to P₁V₁/T₁ = P₂V₂/T₂.",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.3",
+    "prompt": "What equations of state are listed for an ideal gas?",
+    "answer": "PV = nRT = Nk_B T",
+    "units": "P in Pa, V in m³",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.3",
+    "prompt": "What kinetic-theory equation links pressure, density and rms speed?",
+    "answer": "P = 1/3 ρv²",
+    "units": "Pa",
+    "notes": "v here is rms speed.",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.3",
+    "prompt": "What equation gives internal energy of an ideal gas?",
+    "answer": "U = 3/2 nRT = 3/2 Nk_B T",
+    "units": "J",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.4",
+    "prompt": "What is the first law of thermodynamics as written in the booklet?",
+    "answer": "Q = ΔU + W",
+    "units": "J",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "B.4",
+    "prompt": "What equation gives work done by a gas at pressure P during volume change ΔV?",
+    "answer": "W = PΔV",
+    "units": "J",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "B.4",
+    "prompt": "What equation gives change in internal energy of an ideal gas for a temperature change?",
+    "answer": "ΔU = 3/2 nRΔT = 3/2 N k_B ΔT",
+    "units": "J",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "B.4",
+    "prompt": "What equation gives entropy change for reversible heat flow at temperature T?",
+    "answer": "ΔS = ΔQ/T",
+    "units": "J K⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "B.4",
+    "prompt": "What statistical equation for entropy is listed?",
+    "answer": "S = k_B lnΩ",
+    "units": "J K⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "B.4",
+    "prompt": "What adiabatic model equation is listed for a monatomic ideal gas?",
+    "answer": "PV^(5/3) = constant",
+    "units": "",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "B.4",
+    "prompt": "What equation defines efficiency of a heat engine?",
+    "answer": "η = useful work / input energy",
+    "units": "dimensionless",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "B.4",
+    "prompt": "What Carnot-efficiency equation is listed?",
+    "answer": "η_Carnot = 1 − T_c/T_h",
+    "units": "dimensionless",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "B.5",
+    "prompt": "What equation defines electric current from charge flow?",
+    "answer": "I = Δq/Δt",
+    "units": "A",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.5",
+    "prompt": "What equation defines potential difference from work done per charge?",
+    "answer": "V = W/q",
+    "units": "V",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.5",
+    "prompt": "What equation defines resistance?",
+    "answer": "R = V/I",
+    "units": "Ω",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.5",
+    "prompt": "What equation links resistivity to resistance, cross-sectional area and length?",
+    "answer": "ρ = RA/L",
+    "units": "Ω m",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.5",
+    "prompt": "What equivalent equations give electrical power?",
+    "answer": "P = IV = I²R = V²/R",
+    "units": "W",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.5",
+    "prompt": "For a series circuit, what is true of current, voltage, and equivalent resistance?",
+    "answer": "I = I₁ = I₂ = … ;  V = V₁ + V₂ + … ;  R_s = R₁ + R₂ + …",
+    "units": "",
+    "notes": "Same current through all components.",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.5",
+    "prompt": "For a parallel circuit, what is true of current, voltage, and equivalent resistance?",
+    "answer": "I = I₁ + I₂ + … ;  V = V₁ = V₂ = … ;  1/R_p = 1/R₁ + 1/R₂ + …",
+    "units": "",
+    "notes": "Same voltage across each branch.",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "B.5",
+    "prompt": "What equation links emf, current, external resistance and internal resistance?",
+    "answer": "ε = I(R + r)",
+    "units": "V",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "C.1",
+    "prompt": "What SHM equation links acceleration and displacement?",
+    "answer": "a = −ω²x",
+    "units": "m s⁻²",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "C.1",
+    "prompt": "What equations link period, frequency and angular frequency?",
+    "answer": "T = 1/f = 2π/ω",
+    "units": "s",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "C.1",
+    "prompt": "What equation gives the period of a mass–spring oscillator?",
+    "answer": "T = 2π √(m/k)",
+    "units": "s",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "C.1",
+    "prompt": "What equation gives the period of a simple pendulum?",
+    "answer": "T = 2π √(l/g)",
+    "units": "s",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "C.2",
+    "prompt": "What equivalent equations make up the wave model relation?",
+    "answer": "v = fλ = λ/T",
+    "units": "m s⁻¹",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "C.3",
+    "prompt": "What refraction relationship is given between refractive indices, angles and speeds?",
+    "answer": "n₁/n₂ = sinθ₂/sinθ₁ = v₂/v₁",
+    "units": "dimensionless",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "C.3",
+    "prompt": "What is the path-difference condition for constructive interference?",
+    "answer": "path difference = nλ",
+    "units": "",
+    "notes": "n = 0,1,2,...",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "C.3",
+    "prompt": "What is the path-difference condition for destructive interference?",
+    "answer": "path difference = (n + 1/2)λ",
+    "units": "",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "C.3",
+    "prompt": "What equation gives fringe spacing s in Young’s double-slit experiment?",
+    "answer": "s = λD/d",
+    "units": "m",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "C.5",
+    "prompt": "What approximate Doppler relation is given between fractional frequency shift, fractional wavelength shift and relative speed?",
+    "answer": "Δf/f ≈ Δλ/λ ≈ v/c",
+    "units": "dimensionless",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "C.1 HL",
+    "prompt": "What displacement equation for SHM includes amplitude x₀ and phase φ?",
+    "answer": "x = x₀ sin(ωt + φ)",
+    "units": "m",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "C.1 HL",
+    "prompt": "What velocity equation for SHM includes amplitude x₀ and phase φ?",
+    "answer": "v = ωx₀ cos(ωt + φ)",
+    "units": "m s⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "C.1 HL",
+    "prompt": "What speed–displacement equation is listed for SHM?",
+    "answer": "v = ±ω√(x₀² − x²)",
+    "units": "m s⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "C.1 HL",
+    "prompt": "What equation gives the total energy of an SHM oscillator?",
+    "answer": "E_T = 1/2 mω²x₀²",
+    "units": "J",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "C.1 HL",
+    "prompt": "What equation gives the potential energy in SHM at displacement x?",
+    "answer": "E_p = 1/2 mω²x²",
+    "units": "J",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "C.3 HL",
+    "prompt": "What single-slit diffraction relation is listed for the first minimum?",
+    "answer": "θ = λ/b",
+    "units": "rad for small angles",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "C.3 HL",
+    "prompt": "What diffraction-grating relation is listed?",
+    "answer": "nλ = d sinθ",
+    "units": "",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "C.5 HL",
+    "prompt": "What Doppler equation is listed for a moving source?",
+    "answer": "f' = f × v/(v ∓ u_s)",
+    "units": "Hz",
+    "notes": "Use the sign convention from your course notes.",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "C.5 HL",
+    "prompt": "What Doppler equation is listed for a moving observer?",
+    "answer": "f' = f × (v ± u_o)/v",
+    "units": "Hz",
+    "notes": "Use the sign convention from your course notes.",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "D.1",
+    "prompt": "What is Newton’s law of gravitation?",
+    "answer": "F = G m₁m₂ / r²",
+    "units": "N",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "D.1",
+    "prompt": "What equivalent equations define gravitational field strength g?",
+    "answer": "g = F/m = GM/r²",
+    "units": "N kg⁻¹ = m s⁻²",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "D.2",
+    "prompt": "What is Coulomb’s law in terms of ε₀?",
+    "answer": "F = k q₁q₂ / r²,   where k = 1/(4π ε₀)",
+    "units": "N",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "D.2",
+    "prompt": "What equation defines electric field strength from force and charge?",
+    "answer": "E = F/q",
+    "units": "N C⁻¹",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "D.2",
+    "prompt": "What equation gives electric field strength in a uniform field from potential difference and plate spacing?",
+    "answer": "E = V/d",
+    "units": "V m⁻¹ = N C⁻¹",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "D.3",
+    "prompt": "What equation gives magnetic force on a moving charged particle?",
+    "answer": "F = qvB sinθ",
+    "units": "N",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "D.3",
+    "prompt": "What equation gives magnetic force on a current-carrying wire?",
+    "answer": "F = BIL sinθ",
+    "units": "N",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "D.3",
+    "prompt": "What equation gives force per unit length between parallel currents?",
+    "answer": "F/L = μ₀ I₁I₂ / (2πr)",
+    "units": "N m⁻¹",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "D.1 HL",
+    "prompt": "What equation gives gravitational potential energy for two masses separated by r?",
+    "answer": "E_p = −G m₁m₂ / r",
+    "units": "J",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "D.1 HL",
+    "prompt": "What equation gives gravitational potential at distance r from mass M?",
+    "answer": "V_g = −GM/r",
+    "units": "J kg⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "D.1 HL",
+    "prompt": "What gradient equation links field strength and gravitational potential?",
+    "answer": "g = −ΔV_g / Δr",
+    "units": "N kg⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "D.1 HL",
+    "prompt": "What equation gives work done moving a mass through a gravitational potential difference?",
+    "answer": "W = m ΔV_g",
+    "units": "J",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "D.1 HL",
+    "prompt": "What equation gives escape speed?",
+    "answer": "v_esc = √(2GM/r)",
+    "units": "m s⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "D.1 HL",
+    "prompt": "What equation gives orbital speed?",
+    "answer": "v_orbital = √(GM/r)",
+    "units": "m s⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "D.2 HL",
+    "prompt": "What equation gives electric potential energy for two point charges?",
+    "answer": "E_p = k q₁q₂ / r",
+    "units": "J",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "D.2 HL",
+    "prompt": "What equation gives electric potential at distance r from charge Q?",
+    "answer": "V_e = kQ/r",
+    "units": "V",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "D.2 HL",
+    "prompt": "What gradient equation links electric field strength and electric potential?",
+    "answer": "E = −ΔV_e / Δr",
+    "units": "V m⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "D.2 HL",
+    "prompt": "What equation gives work done moving a charge through a potential difference?",
+    "answer": "W = q ΔV_e",
+    "units": "J",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "D.4",
+    "prompt": "What equation defines magnetic flux through area A?",
+    "answer": "Φ = BA cosθ",
+    "units": "Wb",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "D.4",
+    "prompt": "What is Faraday’s law of induction for a coil with N turns?",
+    "answer": "ε = −N ΔΦ/Δt",
+    "units": "V",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "D.4",
+    "prompt": "What equation gives the emf induced across a straight conductor moving in a magnetic field?",
+    "answer": "ε = BvL",
+    "units": "V",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "E.1",
+    "prompt": "What equation gives photon energy from frequency?",
+    "answer": "E = hf",
+    "units": "J",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "E.3",
+    "prompt": "What equation gives energy released from mass loss?",
+    "answer": "E = mc²",
+    "units": "J",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "E.5",
+    "prompt": "What parallax equation gives distance to a star in parsecs?",
+    "answer": "d(parsec) = 1 / p(arc-second)",
+    "units": "pc",
+    "notes": "",
+    "hl": false,
+    "type": "equation"
+  },
+  {
+    "section": "E.1 HL",
+    "prompt": "What nuclear-size equation is listed?",
+    "answer": "R = R₀ A^(1/3)",
+    "units": "m",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "E.1 HL",
+    "prompt": "What Bohr-model equation gives the energy of the nth level?",
+    "answer": "E_n = −13.6 / n² eV",
+    "units": "eV",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "E.1 HL",
+    "prompt": "What Bohr quantisation condition is listed?",
+    "answer": "mvr = nh/(2π)",
+    "units": "kg m² s⁻¹",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "E.2 HL",
+    "prompt": "What photoelectric equation gives the maximum kinetic energy of emitted electrons?",
+    "answer": "E_max = hf − Φ",
+    "units": "J or eV",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "E.2 HL",
+    "prompt": "What equation gives the de Broglie wavelength?",
+    "answer": "λ = h/p",
+    "units": "m",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "E.2 HL",
+    "prompt": "What Compton-shift equation is listed?",
+    "answer": "λ_f − λ_i = Δλ = h/(m_e c) (1 − cosθ)",
+    "units": "m",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "E.3 HL",
+    "prompt": "What radioactive decay equation gives the number of undecayed nuclei after time t?",
+    "answer": "N = N₀ e^(−λt)",
+    "units": "",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "E.3 HL",
+    "prompt": "What equation gives activity in terms of decay constant and nuclei remaining?",
+    "answer": "A = λN = λN₀ e^(−λt)",
+    "units": "Bq",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  },
+  {
+    "section": "E.3 HL",
+    "prompt": "What equation links half-life and decay constant?",
+    "answer": "T₁/₂ = ln2 / λ",
+    "units": "s",
+    "notes": "",
+    "hl": true,
+    "type": "equation"
+  }
+];
+let filtered = [...ALL_CARDS];
+let current = 0;
+let flipped = false;
+
+const el = {
+  search: document.getElementById('search'),
+  sectionFilter: document.getElementById('sectionFilter'),
+  hlFilter: document.getElementById('hlFilter'),
+  card: document.getElementById('card'),
+  prompt: document.getElementById('prompt'),
+  answer: document.getElementById('answer'),
+  units: document.getElementById('units'),
+  notes: document.getElementById('notes'),
+  unitsBox: document.getElementById('unitsBox'),
+  notesBox: document.getElementById('notesBox'),
+  frontBadges: document.getElementById('frontBadges'),
+  backBadges: document.getElementById('backBadges'),
+  indexTop: document.getElementById('indexTop'),
+  indexBack: document.getElementById('indexBack'),
+  countPill: document.getElementById('countPill'),
+  progressBar: document.getElementById('progressBar'),
+  prevBtn: document.getElementById('prevBtn'),
+  nextBtn: document.getElementById('nextBtn'),
+  flipBtn: document.getElementById('flipBtn'),
+  shuffleBtn: document.getElementById('shuffleBtn'),
+  resetBtn: document.getElementById('resetBtn')
+};
+
+function uniqSections() {
+  return ['all', ...new Set(ALL_CARDS.map(c => c.section))];
+}
+
+function buildSectionMenu() {
+  el.sectionFilter.innerHTML = uniqSections().map(s => `<option value="${s}">${s === 'all' ? 'All sections' : s}</option>`).join('');
+}
+
+function badgeHTML(card) {
+  return `
+    <span class="badge">${card.section}</span>
+    <span class="badge type-${card.type}">${card.type}</span>
+    ${card.hl ? '<span class="badge hl">HL</span>' : ''}
+  `;
+}
+
+function render() {
+  if (!filtered.length) {
+    el.prompt.textContent = 'No cards match the current filters.';
+    el.answer.textContent = 'Try broadening the search or resetting the deck.';
+    el.frontBadges.innerHTML = '';
+    el.backBadges.innerHTML = '';
+    el.unitsBox.style.display = 'none';
+    el.notesBox.style.display = 'none';
+    el.countPill.textContent = '0 cards';
+    el.indexTop.textContent = '—';
+    el.indexBack.textContent = '—';
+    el.progressBar.style.width = '0%';
+    return;
+  }
+
+  const card = filtered[current];
+  el.prompt.textContent = card.prompt;
+  el.answer.textContent = card.answer;
+  el.frontBadges.innerHTML = badgeHTML(card);
+  el.backBadges.innerHTML = badgeHTML(card);
+  el.indexTop.textContent = `${current + 1} / ${filtered.length}`;
+  el.indexBack.textContent = `${current + 1} / ${filtered.length}`;
+  el.countPill.textContent = `${filtered.length} cards active from ${ALL_CARDS.length} total`;
+
+  if (card.units) {
+    el.units.textContent = card.units;
+    el.unitsBox.style.display = 'block';
+  } else {
+    el.unitsBox.style.display = 'none';
+  }
+  if (card.notes) {
+    el.notes.textContent = card.notes;
+    el.notesBox.style.display = 'block';
+  } else {
+    el.notesBox.style.display = 'none';
+  }
+
+  el.progressBar.style.width = `${((current + 1) / filtered.length) * 100}%`;
+  el.card.classList.toggle('flipped', flipped);
+}
+
+function applyFilters() {
+  const q = el.search.value.trim().toLowerCase();
+  const sec = el.sectionFilter.value;
+  const hl = el.hlFilter.value;
+
+  filtered = ALL_CARDS.filter(card => {
+    const matchSection = sec === 'all' || card.section === sec;
+    const matchHL = hl === 'all' || (hl === 'hl' ? card.hl : !card.hl);
+    const hay = [card.section, card.prompt, card.answer, card.units, card.notes, card.type].join(' ').toLowerCase();
+    return matchSection && matchHL && (!q || hay.includes(q));
+  });
+
+  current = 0;
+  flipped = false;
+  render();
+}
+
+function flipCard() {
+  if (!filtered.length) return;
+  flipped = !flipped;
+  render();
+}
+
+function nextCard() {
+  if (!filtered.length) return;
+  current = (current + 1) % filtered.length;
+  flipped = false;
+  render();
+}
+
+function prevCard() {
+  if (!filtered.length) return;
+  current = (current - 1 + filtered.length) % filtered.length;
+  flipped = false;
+  render();
+}
+
+function shuffleCards() {
+  for (let i = filtered.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
+  }
+  current = 0;
+  flipped = false;
+  render();
+}
+
+function resetAll() {
+  el.search.value = '';
+  el.sectionFilter.value = 'all';
+  el.hlFilter.value = 'all';
+  filtered = [...ALL_CARDS];
+  current = 0;
+  flipped = false;
+  render();
+}
+
+buildSectionMenu();
+resetAll();
+
+el.search.addEventListener('input', applyFilters);
+el.sectionFilter.addEventListener('change', applyFilters);
+el.hlFilter.addEventListener('change', applyFilters);
+el.flipBtn.addEventListener('click', flipCard);
+el.nextBtn.addEventListener('click', nextCard);
+el.prevBtn.addEventListener('click', prevCard);
+el.shuffleBtn.addEventListener('click', shuffleCards);
+el.resetBtn.addEventListener('click', resetAll);
+
+let startX = 0;
+let startY = 0;
+let moved = false;
+
+el.card.addEventListener('touchstart', e => {
+  const t = e.changedTouches[0];
+  startX = t.clientX;
+  startY = t.clientY;
+  moved = false;
+}, {passive:true});
+
+el.card.addEventListener('touchmove', e => {
+  moved = true;
+}, {passive:true});
+
+el.card.addEventListener('touchend', e => {
+  const t = e.changedTouches[0];
+  const dx = t.clientX - startX;
+  const dy = t.clientY - startY;
+  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) {
+    if (dx < 0) nextCard(); else prevCard();
+  } else if (!moved || (Math.abs(dx) < 10 && Math.abs(dy) < 10)) {
+    flipCard();
+  }
+}, {passive:true});
+
+let mouseDown = false;
+el.card.addEventListener('mousedown', e => {
+  mouseDown = true;
+  startX = e.clientX;
+  startY = e.clientY;
+});
+window.addEventListener('mouseup', e => {
+  if (!mouseDown) return;
+  mouseDown = false;
+  const dx = e.clientX - startX;
+  const dy = e.clientY - startY;
+  if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy)) {
+    if (dx < 0) nextCard(); else prevCard();
+  } else {
+    flipCard();
+  }
+});
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') nextCard();
+  if (e.key === 'ArrowLeft') prevCard();
+  if (e.key === ' ' || e.key === 'Enter') {
+    e.preventDefault();
+    flipCard();
+  }
+});
+</script>
+</body>
+</html>
