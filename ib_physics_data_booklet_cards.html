@@ -112,7 +112,12 @@ small.key {
   .controls .search { grid-column: 1 / -1; }
   .card, .card-inner { min-height: 500px; }
 }
+.math-display { display:inline-block; max-width:100%; }
+.prompt .math-inline { white-space: normal; }
 </style>
+
+<script>window.MathJax = { tex: {inlineMath: [["\(","\)"]], displayMath: [["\[","\]"]]}, svg: {fontCache: "global"} };</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -197,7 +202,7 @@ small.key {
 const ALL_CARDS = [
   {
     "section": "Maths",
-    "prompt": "What equation gives the area of a triangle from base b and height h?",
+    "prompt": "You know the base and perpendicular height of a triangular region. Which relation from the databooklet gives its area?",
     "answer": "A = 1/2 bh",
     "units": "A in m² if b,h are in m",
     "notes": "",
@@ -206,7 +211,7 @@ const ALL_CARDS = [
   },
   {
     "section": "Maths",
-    "prompt": "What equation gives the area of a circle from radius r?",
+    "prompt": "A cross-section is circular and you know only its radius. Which relation gives its area?",
     "answer": "A = πr²",
     "units": "A in m² if r is in m",
     "notes": "",
@@ -215,7 +220,7 @@ const ALL_CARDS = [
   },
   {
     "section": "Maths",
-    "prompt": "What equation gives the circumference of a circle from radius r?",
+    "prompt": "A wheel or circular path has known radius r. Which relation gives the distance around it?",
     "answer": "C = 2πr",
     "units": "C in m if r is in m",
     "notes": "",
@@ -224,7 +229,7 @@ const ALL_CARDS = [
   },
   {
     "section": "Maths",
-    "prompt": "What equation gives the volume of a cuboid from width w, length l, and height h?",
+    "prompt": "You are modelling a rectangular block from its length, width, and height. Which relation gives its volume?",
     "answer": "V = wlh",
     "units": "V in m³",
     "notes": "",
@@ -233,7 +238,7 @@ const ALL_CARDS = [
   },
   {
     "section": "Maths",
-    "prompt": "What equation gives the volume of a cylinder from radius r and height h?",
+    "prompt": "A tank is cylindrical and you know its radius and height. Which relation gives the enclosed volume?",
     "answer": "V = πr²h",
     "units": "V in m³",
     "notes": "",
@@ -242,7 +247,7 @@ const ALL_CARDS = [
   },
   {
     "section": "Maths",
-    "prompt": "What equation gives the volume of a prism from cross-sectional area A and height h?",
+    "prompt": "For a prism with known cross-sectional area and length, which databooklet relation gives the volume?",
     "answer": "V = Ah",
     "units": "V in m³",
     "notes": "",
@@ -251,7 +256,7 @@ const ALL_CARDS = [
   },
   {
     "section": "Maths",
-    "prompt": "What equation gives the volume of a sphere from radius r?",
+    "prompt": "A droplet or planet is modelled as a sphere. Which relation gives its volume from radius?",
     "answer": "V = 4/3 πr³",
     "units": "V in m³",
     "notes": "",
@@ -314,169 +319,169 @@ const ALL_CARDS = [
   },
   {
     "section": "Constants",
-    "prompt": "What value and units are used for acceleration of free fall at Earth’s surface?",
+    "prompt": "You are estimating weight near Earth’s surface or converting mass into weight. Which constant value does the databooklet use for the local free-fall acceleration?",
     "answer": "g = 9.8 m s⁻²",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": false,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What value and units are used for the gravitational constant?",
+    "prompt": "You are using Newton’s law of gravitation or gravitational field/orbit formulae. Which numerical value of the universal gravitational constant does the databooklet use?",
     "answer": "G = 6.67 × 10⁻¹¹ N m² kg⁻²",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": false,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What value and units are used for Avogadro’s constant?",
+    "prompt": "You need to convert between number of particles and moles. Which value of Avogadro’s constant is provided?",
     "answer": "N_A = 6.02 × 10²³ mol⁻¹",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": false,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What value and units are used for the gas constant?",
+    "prompt": "You are switching between PV = nRT and energy relations in thermodynamics. Which value of the molar gas constant does the databooklet use?",
     "answer": "R = 8.31 J K⁻¹ mol⁻¹",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": false,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What value and units are used for the Boltzmann constant?",
+    "prompt": "You are working per particle rather than per mole in kinetic theory. Which value of the Boltzmann constant is provided?",
     "answer": "k_B = 1.38 × 10⁻²³ J K⁻¹",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": true,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What value and units are used for the Stefan–Boltzmann constant?",
+    "prompt": "You are using black-body radiation or luminosity relations. Which value of the Stefan–Boltzmann constant does the databooklet use?",
     "answer": "σ = 5.67 × 10⁻⁸ W m⁻² K⁻⁴",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": false,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What value and units are used for Coulomb’s constant?",
+    "prompt": "You are calculating electrostatic force or electric potential from point charges. Which value of Coulomb’s constant is provided?",
     "answer": "k = 8.99 × 10⁹ N m² C⁻²",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": false,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What value and units are used for the permittivity of free space?",
+    "prompt": "A field relation involves the vacuum permittivity, especially through k = 1/(4π ε₀). Which value does the databooklet provide for ε₀?",
     "answer": "ε₀ = 8.85 × 10⁻¹² C² N⁻¹ m⁻²",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": true,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What value and units are used for the permeability of free space?",
+    "prompt": "You are using the force-between-parallel-wires relation. Which value of the permeability of free space does the databooklet provide?",
     "answer": "μ₀ = 4π × 10⁻⁷ T m A⁻¹",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": true,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What value and units are used for the speed of light in vacuum?",
+    "prompt": "A relativity, wave, or quantum question needs the speed of light in vacuum. Which value is taken in the databooklet?",
     "answer": "c = 3.00 × 10⁸ m s⁻¹",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": false,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What value and units are used for Planck’s constant?",
+    "prompt": "A photon, de Broglie, or quantum-energy question needs Planck’s constant. Which value does the databooklet use?",
     "answer": "h = 6.63 × 10⁻³⁴ J s",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": false,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What value and units are used for the elementary charge?",
+    "prompt": "You need the charge on a single proton or the magnitude of the electron’s charge. Which value of the elementary charge is provided?",
     "answer": "e = 1.60 × 10⁻¹⁹ C",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": false,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What values are used for the electron rest mass?",
+    "prompt": "A photoelectric, Compton, or particle-energy question needs the electron rest mass. Which rest-mass values are provided?",
     "answer": "mₑ = 9.11 × 10⁻³¹ kg = 0.000549 u = 0.511 MeV c⁻²",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": true,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What values are used for the proton rest mass?",
+    "prompt": "A nuclear or particle question needs the proton rest mass. Which rest-mass values are provided?",
     "answer": "mₚ = 1.673 × 10⁻²⁷ kg = 1.007276 u = 938 MeV c⁻²",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": true,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What values are used for the neutron rest mass?",
+    "prompt": "A nuclear or particle question needs the neutron rest mass. Which rest-mass values are provided?",
     "answer": "mₙ = 1.675 × 10⁻²⁷ kg = 1.008665 u = 940 MeV c⁻²",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": true,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What value is used for the unified atomic mass unit?",
+    "prompt": "You are converting between kilograms and atomic-mass/energy units. Which value of the unified atomic mass unit is provided?",
     "answer": "u = 1.661 × 10⁻²⁷ kg = 931.5 MeV c⁻²",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": true,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What value is used for the solar constant?",
+    "prompt": "A climate or solar-radiation problem needs the incident solar power at Earth. Which value of the solar constant is given?",
     "answer": "S = 1.36 × 10³ W m⁻²",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": false,
     "type": "equation"
   },
   {
     "section": "Constants",
-    "prompt": "What value is used for the Fermi radius constant?",
+    "prompt": "A nuclear-size estimate uses R = R₀A^{1/3}. Which value of the Fermi-radius constant is provided?",
     "answer": "R₀ = 1.20 × 10⁻¹⁵ m",
     "units": "",
-    "notes": "",
+    "notes": "Use this when the constant appears inside a larger physical relationship.",
     "hl": true,
     "type": "equation"
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What SI prefix has abbreviation P?",
+    "prompt": "An answer is 10¹⁵ times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "peta = 10¹⁵",
     "units": "",
     "notes": "",
@@ -485,7 +490,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What power of ten does the SI prefix peta represent?",
+    "prompt": "A quantity is written with the SI prefix symbol P. What power of ten does that prefix represent?",
     "answer": "P = 10¹⁵",
     "units": "",
     "notes": "",
@@ -494,7 +499,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What SI prefix has abbreviation T?",
+    "prompt": "An answer is 10¹² times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "tera = 10¹²",
     "units": "",
     "notes": "",
@@ -503,7 +508,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What power of ten does the SI prefix tera represent?",
+    "prompt": "A quantity is written with the SI prefix symbol T. What power of ten does that prefix represent?",
     "answer": "T = 10¹²",
     "units": "",
     "notes": "",
@@ -512,7 +517,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What SI prefix has abbreviation G?",
+    "prompt": "An answer is 10⁹ times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "giga = 10⁹",
     "units": "",
     "notes": "",
@@ -521,7 +526,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What power of ten does the SI prefix giga represent?",
+    "prompt": "A quantity is written with the SI prefix symbol G. What power of ten does that prefix represent?",
     "answer": "G = 10⁹",
     "units": "",
     "notes": "",
@@ -530,7 +535,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What SI prefix has abbreviation M?",
+    "prompt": "An answer is 10⁶ times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "mega = 10⁶",
     "units": "",
     "notes": "",
@@ -539,7 +544,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What power of ten does the SI prefix mega represent?",
+    "prompt": "A quantity is written with the SI prefix symbol M. What power of ten does that prefix represent?",
     "answer": "M = 10⁶",
     "units": "",
     "notes": "",
@@ -548,7 +553,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What SI prefix has abbreviation k?",
+    "prompt": "An answer is 10³ times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "kilo = 10³",
     "units": "",
     "notes": "",
@@ -557,7 +562,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What power of ten does the SI prefix kilo represent?",
+    "prompt": "A quantity is written with the SI prefix symbol k. What power of ten does that prefix represent?",
     "answer": "k = 10³",
     "units": "",
     "notes": "",
@@ -566,7 +571,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What SI prefix has abbreviation h?",
+    "prompt": "An answer is 10² times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "hecto = 10²",
     "units": "",
     "notes": "",
@@ -575,7 +580,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What power of ten does the SI prefix hecto represent?",
+    "prompt": "A quantity is written with the SI prefix symbol h. What power of ten does that prefix represent?",
     "answer": "h = 10²",
     "units": "",
     "notes": "",
@@ -584,7 +589,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What SI prefix has abbreviation da?",
+    "prompt": "An answer is 10¹ times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "deca = 10¹",
     "units": "",
     "notes": "",
@@ -593,7 +598,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What power of ten does the SI prefix deca represent?",
+    "prompt": "An answer is 10¹ times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "da = 10¹",
     "units": "",
     "notes": "",
@@ -602,7 +607,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What SI prefix has abbreviation d?",
+    "prompt": "An answer is 10⁻¹ times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "deci = 10⁻¹",
     "units": "",
     "notes": "",
@@ -611,7 +616,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What power of ten does the SI prefix deci represent?",
+    "prompt": "A quantity is written with the SI prefix symbol d. What power of ten does that prefix represent?",
     "answer": "d = 10⁻¹",
     "units": "",
     "notes": "",
@@ -620,7 +625,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What SI prefix has abbreviation c?",
+    "prompt": "An answer is 10⁻² times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "centi = 10⁻²",
     "units": "",
     "notes": "",
@@ -629,7 +634,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What power of ten does the SI prefix centi represent?",
+    "prompt": "A quantity is written with the SI prefix symbol c. What power of ten does that prefix represent?",
     "answer": "c = 10⁻²",
     "units": "",
     "notes": "",
@@ -638,7 +643,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What SI prefix has abbreviation m?",
+    "prompt": "An answer is 10⁻³ times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "milli = 10⁻³",
     "units": "",
     "notes": "",
@@ -647,7 +652,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What power of ten does the SI prefix milli represent?",
+    "prompt": "A quantity is written with the SI prefix symbol m. What power of ten does that prefix represent?",
     "answer": "m = 10⁻³",
     "units": "",
     "notes": "",
@@ -656,7 +661,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What SI prefix has abbreviation μ?",
+    "prompt": "An answer is 10⁻⁶ times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "micro = 10⁻⁶",
     "units": "",
     "notes": "",
@@ -665,7 +670,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What power of ten does the SI prefix micro represent?",
+    "prompt": "A quantity is written with the SI prefix symbol μ. What power of ten does that prefix represent?",
     "answer": "μ = 10⁻⁶",
     "units": "",
     "notes": "",
@@ -674,7 +679,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What SI prefix has abbreviation n?",
+    "prompt": "An answer is 10⁻⁹ times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "nano = 10⁻⁹",
     "units": "",
     "notes": "",
@@ -683,7 +688,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What power of ten does the SI prefix nano represent?",
+    "prompt": "A quantity is written with the SI prefix symbol n. What power of ten does that prefix represent?",
     "answer": "n = 10⁻⁹",
     "units": "",
     "notes": "",
@@ -692,7 +697,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What SI prefix has abbreviation p?",
+    "prompt": "An answer is 10⁻¹² times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "pico = 10⁻¹²",
     "units": "",
     "notes": "",
@@ -701,7 +706,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What power of ten does the SI prefix pico represent?",
+    "prompt": "A quantity is written with the SI prefix symbol p. What power of ten does that prefix represent?",
     "answer": "p = 10⁻¹²",
     "units": "",
     "notes": "",
@@ -710,7 +715,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What SI prefix has abbreviation f?",
+    "prompt": "An answer is 10⁻¹⁵ times the base unit. Which SI prefix corresponds to that scaling?",
     "answer": "femto = 10⁻¹⁵",
     "units": "",
     "notes": "",
@@ -719,7 +724,7 @@ const ALL_CARDS = [
   },
   {
     "section": "SI Prefixes",
-    "prompt": "What power of ten does the SI prefix femto represent?",
+    "prompt": "A quantity is written with the SI prefix symbol f. What power of ten does that prefix represent?",
     "answer": "f = 10⁻¹⁵",
     "units": "",
     "notes": "",
@@ -728,7 +733,7 @@ const ALL_CARDS = [
   },
   {
     "section": "Conversions",
-    "prompt": "How do you convert radians to degrees?",
+    "prompt": "An angle emerges from circular motion or phase work in radians, but the question wants degrees. Which conversion relation is useful?",
     "answer": "1 rad = 180/π °",
     "units": "",
     "notes": "",
@@ -737,7 +742,7 @@ const ALL_CARDS = [
   },
   {
     "section": "Conversions",
-    "prompt": "How do you convert temperature in Celsius to kelvin?",
+    "prompt": "A thermal question gives temperature in °C but the gas law or radiation law needs kelvin. Which conversion should you use?",
     "answer": "T(K) = T(°C) + 273",
     "units": "kelvin",
     "notes": "",
@@ -746,7 +751,7 @@ const ALL_CARDS = [
   },
   {
     "section": "Conversions",
-    "prompt": "What is 1 light year in metres?",
+    "prompt": "An astronomy question gives a distance in light years but a calculation needs SI units. Which booklet conversion is useful?",
     "answer": "1 ly = 9.46 × 10¹⁵ m",
     "units": "",
     "notes": "",
@@ -755,7 +760,7 @@ const ALL_CARDS = [
   },
   {
     "section": "Conversions",
-    "prompt": "What is 1 parsec in light years?",
+    "prompt": "A stellar-distance question moves between parsecs and light years. Which booklet conversion is useful?",
     "answer": "1 pc = 3.26 ly",
     "units": "",
     "notes": "",
@@ -764,7 +769,7 @@ const ALL_CARDS = [
   },
   {
     "section": "Conversions",
-    "prompt": "What is 1 astronomical unit in metres?",
+    "prompt": "An orbital-distance question gives AU but your calculation needs metres. Which conversion is useful?",
     "answer": "1 AU = 1.50 × 10¹¹ m",
     "units": "",
     "notes": "",
@@ -773,7 +778,7 @@ const ALL_CARDS = [
   },
   {
     "section": "Conversions",
-    "prompt": "What is 1 kilowatt-hour in joules?",
+    "prompt": "An electricity bill or energy-storage question uses kWh, but you need joules for physics working. Which conversion is useful?",
     "answer": "1 kWh = 3.60 × 10⁶ J",
     "units": "",
     "notes": "",
@@ -782,7 +787,7 @@ const ALL_CARDS = [
   },
   {
     "section": "Conversions",
-    "prompt": "What useful combined constant links photon energy and wavelength?",
+    "prompt": "A photon-energy question gives wavelength and you want a quick energy conversion. Which combined constant from the booklet is helpful?",
     "answer": "hc = 1.99 × 10⁻²⁵ J m = 1.24 × 10⁻⁶ eV m",
     "units": "",
     "notes": "",
@@ -1097,7 +1102,7 @@ const ALL_CARDS = [
   },
   {
     "section": "A.3",
-    "prompt": "What two equivalent expressions are given for kinetic energy?",
+    "prompt": "You know either an object’s speed or its momentum and mass, and you need its kinetic energy. Which relation from A.3 is useful?",
     "answer": "E_k = 1/2 mv² = p²/(2m)",
     "units": "J",
     "notes": "",
@@ -1331,7 +1336,7 @@ const ALL_CARDS = [
   },
   {
     "section": "B.1",
-    "prompt": "What equation defines density?",
+    "prompt": "You know the mass of a sample and the space it occupies. Which relation gives its density?",
     "answer": "ρ = m/V",
     "units": "kg m⁻³",
     "notes": "",
@@ -1421,7 +1426,7 @@ const ALL_CARDS = [
   },
   {
     "section": "B.3",
-    "prompt": "What equation defines pressure from force and area?",
+    "prompt": "A force is spread over a contact area and you want the intensity of that push on the surface. Which relation gives pressure?",
     "answer": "P = F/A",
     "units": "Pa = N m⁻²",
     "notes": "",
@@ -1556,7 +1561,7 @@ const ALL_CARDS = [
   },
   {
     "section": "B.5",
-    "prompt": "What equation defines potential difference from work done per charge?",
+    "prompt": "A circuit question asks for energy transferred per unit charge between two points. Which relation defines potential difference?",
     "answer": "V = W/q",
     "units": "V",
     "notes": "",
@@ -1565,7 +1570,7 @@ const ALL_CARDS = [
   },
   {
     "section": "B.5",
-    "prompt": "What equation defines resistance?",
+    "prompt": "You know the potential difference across a component and the current through it. Which relation defines resistance?",
     "answer": "R = V/I",
     "units": "Ω",
     "notes": "",
@@ -1583,7 +1588,7 @@ const ALL_CARDS = [
   },
   {
     "section": "B.5",
-    "prompt": "What equivalent equations give electrical power?",
+    "prompt": "A resistor or appliance question asks for the rate of energy transfer in a circuit. Which equivalent power relations are useful?",
     "answer": "P = IV = I²R = V²/R",
     "units": "W",
     "notes": "",
@@ -2130,6 +2135,100 @@ function badgeHTML(card) {
   `;
 }
 
+
+
+const subMap = {'₀':'0','₁':'1','₂':'2','₃':'3','₄':'4','₅':'5','₆':'6','₇':'7','₈':'8','₉':'9','ₐ':'a','ₑ':'e','ₕ':'h','ᵢ':'i','ⱼ':'j','ₖ':'k','ₗ':'l','ₘ':'m','ₙ':'n','ₒ':'o','ₚ':'p','ᵣ':'r','ₛ':'s','ₜ':'t','ᵤ':'u','ᵥ':'v','ₓ':'x'};
+const supMap = {'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-','⁺':'+','⁽':'(','⁾':')','ᵃ':'a','ᵇ':'b','ᶜ':'c','ᵈ':'d','ᵉ':'e','ᶠ':'f','ᵍ':'g','ʰ':'h','ⁱ':'i','ʲ':'j','ᵏ':'k','ˡ':'l','ᵐ':'m','ⁿ':'n','ᵒ':'o','ᵖ':'p','ʳ':'r','ˢ':'s','ᵗ':'t','ᵘ':'u','ᵛ':'v','ʷ':'w','ˣ':'x','ʸ':'y','ᶻ':'z'};
+
+function convertUnicodeScripts(str) {
+  return str
+    .replace(/([A-Za-zΑ-Ωα-ωΔΦΩλμνερπτσxvgVLIRTEPUnmkqfdabhc])(₀|₁|₂|₃|₄|₅|₆|₇|₈|₉|ₐ|ₑ|ₕ|ᵢ|ⱼ|ₖ|ₗ|ₘ|ₙ|ₒ|ₚ|ᵣ|ₛ|ₜ|ᵤ|ᵥ|ₓ)+/g, (_, base, subs) => {
+      const s = [...subs].map(ch => subMap[ch] || ch).join('');
+      return `${base}_{${s}}`;
+    })
+    .replace(/([A-Za-zΑ-Ωα-ωΔΦΩλμνερπτσxvgVLIRTEPUnmkqfdabhc\)]+)(⁰|¹|²|³|⁴|⁵|⁶|⁷|⁸|⁹|⁻|⁺|⁽|⁾|ᵃ|ᵇ|ᶜ|ᵈ|ᵉ|ᶠ|ᵍ|ʰ|ⁱ|ʲ|ᵏ|ˡ|ᵐ|ⁿ|ᵒ|ᵖ|ʳ|ˢ|ᵗ|ᵘ|ᵛ|ʷ|ˣ|ʸ|ᶻ)+/g, (_, base, sups) => {
+      const s = [...sups].map(ch => supMap[ch] || ch).join('');
+      return `${base}^{${s}}`;
+    });
+}
+
+function texifyUnits(s) {
+  return s
+    .replace(/\bkg\b/g,'\\mathrm{kg}')
+    .replace(/\bmol\b/g,'\\mathrm{mol}')
+    .replace(/\bMeV\b/g,'\\mathrm{MeV}')
+    .replace(/\beV\b/g,'\\mathrm{eV}')
+    .replace(/\bJ\b/g,'\\mathrm{J}')
+    .replace(/\bN\b/g,'\\mathrm{N}')
+    .replace(/\bW\b/g,'\\mathrm{W}')
+    .replace(/\bV\b/g,'\\mathrm{V}')
+    .replace(/\bC\b/g,'\\mathrm{C}')
+    .replace(/\bK\b/g,'\\mathrm{K}')
+    .replace(/\bA\b/g,'\\mathrm{A}')
+    .replace(/\bT\b/g,'\\mathrm{T}')
+    .replace(/\bm\b/g,'\\mathrm{m}')
+    .replace(/\bs\b/g,'\\mathrm{s}')
+    .replace(/\brad\b/g,'\\mathrm{rad}')
+    .replace(/\bpc\b/g,'\\mathrm{pc}')
+    .replace(/\bly\b/g,'\\mathrm{ly}')
+    .replace(/\bAU\b/g,'\\mathrm{AU}')
+    .replace(/\bkWh\b/g,'\\mathrm{kWh}');
+}
+
+function fracify(s) {
+  const reps = [
+    [/1\/2/g,'\\frac{1}{2}'],
+    [/4\/3/g,'\\frac{4}{3}'],
+    [/180\/π/g,'\\frac{180}{\\pi}'],
+    [/Δy\/y/g,'\\frac{\\Delta y}{y}'],[/Δa\/a/g,'\\frac{\\Delta a}{a}'],[/Δb\/b/g,'\\frac{\\Delta b}{b}'],[/Δc\/c/g,'\\frac{\\Delta c}{c}'],
+    [/Δp\/Δt/g,'\\frac{\\Delta p}{\\Delta t}'],[/ΔW\/Δt/g,'\\frac{\\Delta W}{\\Delta t}'],[/ΔQ\/Δt/g,'\\frac{\\Delta Q}{\\Delta t}'],[/ΔQ\/T/g,'\\frac{\\Delta Q}{T}'],
+    [/W\/q/g,'\\frac{W}{q}'],[/V\/I/g,'\\frac{V}{I}'],[/RA\/L/g,'\\frac{RA}{L}'],[/m\/V/g,'\\frac{m}{V}'],[/F\/A/g,'\\frac{F}{A}'],[/N\/N_A/g,'\\frac{N}{N_A}'],[/PV\/T/g,'\\frac{PV}{T}'],
+    [/v²\/r/g,'\\frac{v^2}{r}'],[/4π²r\/T²/g,'\\frac{4\\pi^2 r}{T^2}'],[/2πr\/T/g,'\\frac{2\\pi r}{T}'],[/p²\/\(2m\)/g,'\\frac{p^2}{2m}'],
+    [/L \/ \(4πd²\)/g,'\\frac{L}{4\\pi d^2}'],[/kA ΔT\/Δx/g,'\\frac{kA \\Delta T}{\\Delta x}'],[/1\/3 ρv²/g,'\\frac{1}{3} \\rho v^2'],[/3\/2 k_B T/g,'\\frac{3}{2} k_B T'],[/3\/2 nRT/g,'\\frac{3}{2} nRT'],[/3\/2 Nk_B T/g,'\\frac{3}{2} Nk_B T'],[/3\/2 nRΔT/g,'\\frac{3}{2} nR\\Delta T'],[/3\/2 N k_B ΔT/g,'\\frac{3}{2} N k_B \\Delta T'],
+    [/T_c\/T_h/g,'\\frac{T_c}{T_h}'],[/1\/f/g,'\\frac{1}{f}'],[/2π\/ω/g,'\\frac{2\\pi}{\\omega}'],[/λ\/T/g,'\\frac{\\lambda}{T}'],[/sinθ₂\/sinθ₁/g,'\\frac{\\sin\\theta_2}{\\sin\\theta_1}'],[/v₂\/v₁/g,'\\frac{v_2}{v_1}'],[/λD\/d/g,'\\frac{\\lambda D}{d}'],[/Δf\/f/g,'\\frac{\\Delta f}{f}'],[/Δλ\/λ/g,'\\frac{\\Delta \\lambda}{\\lambda}'],[/v\/c/g,'\\frac{v}{c}'],
+    [/G m₁m₂ \/ r²/g,'\\frac{G m_1 m_2}{r^2}'],[/GM\/r²/g,'\\frac{GM}{r^2}'],[/k q₁q₂ \/ r²/g,'\\frac{k q_1 q_2}{r^2}'],[/1\/\(4π ε₀\)/g,'\\frac{1}{4\\pi \\varepsilon_0}'],[/F\/q/g,'\\frac{F}{q}'],[/V\/d/g,'\\frac{V}{d}'],[/μ₀ I₁I₂ \/ \(2πr\)/g,'\\frac{\\mu_0 I_1 I_2}{2\\pi r}'],[/−GM\/r/g,'-\\frac{GM}{r}'],[/−G m₁m₂ \/ r/g,'-\\frac{G m_1 m_2}{r}'],[/√\(2GM\/r\)/g,'\\sqrt{\\frac{2GM}{r}}'],[/√\(GM\/r\)/g,'\\sqrt{\\frac{GM}{r}}'],
+    [/−13\.6 \/ n²/g,'-\\frac{13.6}{n^2}'],[/nh\/\(2π\)/g,'\\frac{nh}{2\\pi}'],[/h\/p/g,'\\frac{h}{p}'],[/h\/\(m_e c\)/g,'\\frac{h}{m_e c}'],[/ln2 \/ λ/g,'\\frac{\\ln 2}{\\lambda}'],[/1 \/ p\(arc-second\)/g,'\\frac{1}{p(\\mathrm{arc\mbox{-}second})}']
+  ];
+  for (const [re, rep] of reps) s=s.replace(re,rep);
+  return s;
+}
+
+function toTeX(str) {
+  let s = str;
+  s = s.replace(/≈/g,'\\approx ').replace(/≤/g,'\\le ').replace(/≥/g,'\\ge ');
+  s = s.replace(/×/g,'\\times ').replace(/π/g,'\\pi ').replace(/θ/g,'\\theta ').replace(/λ/g,'\\lambda ')
+       .replace(/Δ/g,'\\Delta ').replace(/ω/g,'\\omega ').replace(/μ/g,'\\mu ').replace(/ρ/g,'\\rho ')
+       .replace(/σ/g,'\\sigma ').replace(/ε/g,'\\varepsilon ').replace(/η/g,'\\eta ').replace(/Φ/g,'\\Phi ')
+       .replace(/Ω/g,'\\Omega ');
+  s = convertUnicodeScripts(s);
+  s = fracify(s);
+  s = s.replace(/√\((.*?)\)/g,'\\sqrt{$1}');
+  s = s.replace(/\bcosθ/g,'\\cos\\theta').replace(/\bsinθ/g,'\\sin\\theta').replace(/\btanθ/g,'\\tan\\theta').replace(/cosθ/g,'\\cos\\theta').replace(/sinθ/g,'\\sin\\theta').replace(/tanθ/g,'\\tan\\theta');
+  s = s.replace(/cosθ/g,'\\cos\\theta').replace(/sinθ/g,'\\sin\\theta');
+  s = s.replace(/\bconstant\b/g,'\\text{constant}');
+  s = s.replace(/where /g,'\\quad \\text{where } ');
+  s = texifyUnits(s);
+  s = s.replace(/arc-second/g,'\\mathrm{arc\mbox{-}second}');
+  s = s.replace(/useful work out \/ total work in = useful power out \/ total power in/g,'\\frac{\\text{useful work out}}{\\text{total work in}} = \\frac{\\text{useful power out}}{\\text{total power in}}');
+  s = s.replace(/power radiated per unit area/g,'\\text{power radiated per unit area}');
+  s = s.replace(/total scattered power/g,'\\text{total scattered power}');
+  s = s.replace(/total incident power/g,'\\text{total incident power}');
+  s = s.replace(/useful work/g,'\\text{useful work}').replace(/input energy/g,'\\text{input energy}');
+  s = s.replace(/γ rays/g,'\\gamma\\ \text{rays}').replace(/X-rays/g,'\\text{X-rays}').replace(/UV/g,'\\text{UV}').replace(/IR/g,'\\text{IR}');
+  s = s.replace(/\s+/g,' ').trim();
+  return `\\(${s}\\)`;
+}
+
+function setMathHTML(element, raw, display=false) {
+  element.innerHTML = `<span class="math-${display ? 'display' : 'inline'}">${toTeX(raw)}</span>`;
+}
+
+function typesetIfNeeded() {
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise([document.getElementById('prompt'), document.getElementById('answer'), document.getElementById('units'), document.getElementById('notes')]);
+  }
+}
+
 function render() {
   if (!filtered.length) {
     el.prompt.textContent = 'No cards match the current filters.';
@@ -2147,7 +2246,7 @@ function render() {
 
   const card = filtered[current];
   el.prompt.textContent = card.prompt;
-  el.answer.textContent = card.answer;
+  setMathHTML(el.answer, card.answer, true);
   el.frontBadges.innerHTML = badgeHTML(card);
   el.backBadges.innerHTML = badgeHTML(card);
   el.indexTop.textContent = `${current + 1} / ${filtered.length}`;
@@ -2155,7 +2254,7 @@ function render() {
   el.countPill.textContent = `${filtered.length} cards active from ${ALL_CARDS.length} total`;
 
   if (card.units) {
-    el.units.textContent = card.units;
+    setMathHTML(el.units, card.units);
     el.unitsBox.style.display = 'block';
   } else {
     el.unitsBox.style.display = 'none';
@@ -2169,6 +2268,7 @@ function render() {
 
   el.progressBar.style.width = `${((current + 1) / filtered.length) * 100}%`;
   el.card.classList.toggle('flipped', flipped);
+  typesetIfNeeded();
 }
 
 function applyFilters() {
